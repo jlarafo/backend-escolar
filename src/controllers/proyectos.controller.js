@@ -44,13 +44,13 @@ export const deleteProyectos = async (req, res) => {
 
 export const createProyecto = async (req, res) => {
     try {
-        const {titulo, autor , fecha_presentacion, tutor, area_tematica, sub_area, palabras_clave, metodologia, poblacion, resultados, sugerencias,reconocimientos,notas,usuarios  } = req.body;
+        const {titulo, autor , fecha_presentacion, tutor, area_tematica, sub_area, palabras_clave, metodologia, poblacion, resultados, sugerencias,reconocimientos,notas} = req.body;
         const [result] = await pool.query(
-            "INSERT INTO historias (titulo, autor , fecha_presentacion, tutor, area_tematica, sub_area, palabras_clave, metodologia, poblacion, resultados, sugerencias,reconocimientos,notas,usuarios ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            [titulo, autor , fecha_presentacion, tutor, area_tematica, sub_area, palabras_clave, metodologia, poblacion, resultados, sugerencias,reconocimientos,notas,usuarios ]
+            "INSERT INTO proyectos (titulo, autor , fecha_presentacion, tutor, area_tematica, sub_area, palabras_clave, metodologia, poblacion, resultados, sugerencias,reconocimientos,notas) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            [titulo, autor , fecha_presentacion, tutor, area_tematica, sub_area, palabras_clave, metodologia, poblacion, resultados, sugerencias,reconocimientos,notas]
         );
 
-        res.status(201).json({ id: result.insertId, titulo, autor , fecha_presentacion, tutor, area_tematica, sub_area, palabras_clave, metodologia, poblacion, resultados, sugerencias,reconocimientos,notas,usuarios });
+        res.status(201).json({ id: result.insertId, titulo, autor , fecha_presentacion, tutor, area_tematica, sub_area, palabras_clave, metodologia, poblacion, resultados, sugerencias,reconocimientos,notas});
     } catch (error) {
         res.status(500).json({ message: "Something went wrong" });
     }
@@ -61,11 +61,11 @@ export const createProyecto = async (req, res) => {
 export const updateProyecto = async (req, res) => {
     try {
         const { id } = req.params;
-        const { titulo, autor , fecha_presentacion, tutor, area_tematica, sub_area, palabras_clave, metodologia, poblacion, resultados, sugerencias,reconocimientos,notas,usuarios } = req.body;
+        const { titulo, autor , fecha_presentacion, tutor, area_tematica, sub_area, palabras_clave, metodologia, poblacion, resultados, sugerencias,reconocimientos,notas} = req.body;
 
         const [result] = await pool.query(
-            "UPDATE proyectos SET titulo = IFNULL(?, titulo), autor = IFNULL(?, autor), fecha_presentacion = IFNULL(?, fecha_presentacion), tutor = IFNULL(?, tutor), area_tematica = IFNULL(?, area_tematica), sub_area = IFNULL(?, sub_area) , palabras_clave = IFNULL(?, palabras_clave) , poblacion = IFNULL(?, poblacion), resultados = IFNULL(?, resultados), sugerencias = IFNULL(?, sugerencias), reconocimientos = IFNULL(?, reconocimientos), notas = IFNULL(?, notas), usuario = IFNULL(?, usuario) WHERE id = ?",
-            [titulo, autor , fecha_presentacion, tutor, area_tematica, sub_area, palabras_clave, metodologia, poblacion, resultados, sugerencias,reconocimientos,notas,usuarios]
+            "UPDATE proyectos SET titulo = IFNULL(?, titulo), autor = IFNULL(?, autor), fecha_presentacion = IFNULL(?, fecha_presentacion), tutor = IFNULL(?, tutor), area_tematica = IFNULL(?, area_tematica), sub_area = IFNULL(?, sub_area) , palabras_clave = IFNULL(?, palabras_clave) , poblacion = IFNULL(?, poblacion), resultados = IFNULL(?, resultados), sugerencias = IFNULL(?, sugerencias), reconocimientos = IFNULL(?, reconocimientos), notas = IFNULL(?, notas) WHERE id = ?",
+            [titulo, autor , fecha_presentacion, tutor, area_tematica, sub_area, palabras_clave, metodologia, poblacion, resultados, sugerencias,reconocimientos,notas]
         );
 
         if (result.affectedRows === 0)
